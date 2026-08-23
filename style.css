@@ -624,6 +624,8 @@ button {
 }
 
 .service-card {
+  display: flex;
+  flex-direction: column;
   background: var(--color-surface);
   padding: 32px 28px;
   border-radius: var(--radius-md);
@@ -666,6 +668,22 @@ button {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.6;
+  flex-grow: 1;
+}
+
+.service-card__link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  letter-spacing: 0.01em;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.service-card__link:hover {
+  color: var(--color-accent-light);
+  transform: translateX(3px);
 }
 
 /* ===== ПОДХОД ===== */
@@ -1516,12 +1534,25 @@ button {
     gap: 48px;
   }
 
+  .about__text .section__title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .about__quote {
+    font-size: 1.1rem;
+    padding: 20px 22px;
+  }
+
   .about__composition {
     height: 300px;
   }
 
   .services__grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 28px 24px;
   }
 
   .approach__timeline {
