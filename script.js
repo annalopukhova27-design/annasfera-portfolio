@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initActiveNav();
   initReveal();
   initPortfolioFilter();
+  initProjectImages();
   initScrollTop();
   initContactForm();
   initCurrentYear();
@@ -152,6 +153,22 @@ function initPortfolioFilter() {
         card.classList.toggle('hidden', !show);
       });
     });
+  });
+}
+
+/* ===== ЗАГЛУШКИ ИЗОБРАЖЕНИЙ ПРОЕКТОВ ===== */
+function initProjectImages() {
+  document.querySelectorAll('[data-project-image]').forEach(img => {
+    const markMissing = () => img.classList.add('is-missing');
+    const markLoaded = () => img.classList.add('is-loaded');
+
+    img.addEventListener('error', markMissing);
+    img.addEventListener('load', markLoaded);
+
+    if (img.complete) {
+      if (img.naturalWidth === 0) markMissing();
+      else markLoaded();
+    }
   });
 }
 
