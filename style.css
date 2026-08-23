@@ -866,6 +866,10 @@ button {
   object-position: center 22%;
 }
 
+.project-card__image--pos-baby img:not(.is-missing) {
+  object-position: center 18%;
+}
+
 .project-card__body {
   display: flex;
   flex-direction: column;
