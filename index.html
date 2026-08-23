@@ -266,11 +266,12 @@
 
         <div class="portfolio__filters reveal">
           <button class="filter-btn active" data-filter="all">Все</button>
-          <button class="filter-btn" data-filter="neurophoto">Нейрофото</button>
-          <button class="filter-btn" data-filter="video">Видео</button>
-          <button class="filter-btn" data-filter="visual">Визуал</button>
           <button class="filter-btn" data-filter="sites">Сайты</button>
           <button class="filter-btn" data-filter="apps">Приложения</button>
+          <button class="filter-btn" data-filter="interactive">Интерактив</button>
+          <button class="filter-btn" data-filter="video">Видео</button>
+          <button class="filter-btn" data-filter="neurophoto">Нейрофото</button>
+          <button class="filter-btn" data-filter="visual">Визуал</button>
         </div>
 
         <!-- ДОБАВИТЬ НОВЫЙ ПРОЕКТ: скопируйте блок .project-card, укажите data-category -->
@@ -313,29 +314,88 @@
             </div>
           </article>
 
+          <article class="project-card reveal" data-category="sites">
+            <div class="project-card__image">
+              <div class="project-card__placeholder" aria-hidden="true"><span>ColorCraft</span></div>
+              <img src="images/projects/colorcraft.png" alt="ColorCraft — картина по номерам" loading="lazy" data-project-image>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__category">Сайты</span>
+              <h3 class="project-card__title">ColorCraft — картина по номерам</h3>
+              <p class="project-card__text">Демонстрационный сайт-сервис для создания персональной картины по номерам из фотографии: загрузка изображения, выбор параметров и оформление заявки.</p>
+              <ul class="project-card__tools">
+                <li>Lovable</li>
+                <li>Web</li>
+                <li>UI/UX</li>
+              </ul>
+              <div class="project-card__actions">
+                <a href="https://photo-to-canvas-craft.lovable.app/" class="project-card__btn" target="_blank" rel="noopener noreferrer">Открыть сайт</a>
+                <p class="project-card__note">Доступность сайта может зависеть от региона</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="interactive">
+            <div class="project-card__image project-card__image--pos-center">
+              <div class="project-card__placeholder" aria-hidden="true"><span>Дело №17: Исчезнувшая картина</span></div>
+              <img src="images/projects/detective-game.png" alt="Дело №17: Исчезнувшая картина" loading="lazy" data-project-image>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__category">Интерактив</span>
+              <h3 class="project-card__title">Дело №17: Исчезнувшая картина</h3>
+              <p class="project-card__text">Интерактивная браузерная детективная игра: игрок исследует место происшествия, ищет спрятанные улики, использует подсказки и определяет виновного.</p>
+              <ul class="project-card__tools">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Cursor</li>
+              </ul>
+              <a href="https://annalopukhova27-design.github.io/detective-game/" class="project-card__btn" target="_blank" rel="noopener noreferrer">Играть</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-category="interactive">
+            <div class="project-card__image">
+              <div class="project-card__placeholder" aria-hidden="true"><span>Конструктор промптов «АннаСфера»</span></div>
+              <img src="images/projects/prompt-builder.png" alt="Конструктор промптов «АннаСфера»" loading="lazy" data-project-image>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__category">Интерактив</span>
+              <h3 class="project-card__title">Конструктор промптов «АннаСфера»</h3>
+              <p class="project-card__text">Интерактивный инструмент для сборки структурированных промптов по роли, задаче, контексту, тону, ограничениям и формату ответа. Включает готовые шаблоны для разных AI-задач.</p>
+              <ul class="project-card__tools">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Cursor</li>
+              </ul>
+              <a href="https://annalopukhova27-design.github.io/prompt-builder/" class="project-card__btn" target="_blank" rel="noopener noreferrer">Открыть инструмент</a>
+            </div>
+          </article>
+
           <article class="project-card reveal" data-category="video">
             <div class="project-card__image">
               <div class="project-card__placeholder" aria-hidden="true"><span>Белорецк. 1762–2026</span></div>
-              <img src="images/projects/beloretsk.jpg" alt="Белорецк. 1762–2026 — исторический AI-ролик" loading="lazy" data-project-image>
+              <img src="images/projects/beloretsk.png" alt="Белорецк. 1762–2026 — исторический AI-ролик" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
               <span class="project-card__category">Видео</span>
               <h3 class="project-card__title">Белорецк. 1762–2026</h3>
-              <p class="project-card__text">Исторический AI-ролик ко Дню города: от первых поселений и строительства завода до современного Белорецка. Создание визуальных сцен, анимация и монтаж в единый сюжет.</p>
+              <p class="project-card__text">Исторический AI-ролик ко Дню города: от первых поселений и строительства завода до современного Белорецка. Визуальные сцены, анимация и монтаж объединены в единый сюжет.</p>
               <ul class="project-card__tools">
                 <li>AI Image</li>
                 <li>Kling</li>
                 <li>AI Video</li>
                 <li>монтаж</li>
               </ul>
-              <button type="button" class="project-card__btn project-card__btn--soon" disabled>Смотреть проект · Скоро</button>
+              <button type="button" class="project-card__btn project-card__btn--soon" disabled>Скоро</button>
             </div>
           </article>
 
           <article class="project-card reveal" data-category="neurophoto" data-gallery="neurophoto">
             <div class="project-card__image">
               <div class="project-card__placeholder" aria-hidden="true"><span>Нейрофотосессии</span></div>
-              <img src="images/projects/neurophoto.jpg" alt="Нейрофотосессии" loading="lazy" data-project-image>
+              <img src="images/projects/neurophoto.png" alt="Нейрофотосессии" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
               <span class="project-card__category">Нейрофото</span>
@@ -346,14 +406,14 @@
                 <li>Nano Banana</li>
                 <li>AI Image</li>
               </ul>
-              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="neurophoto">Смотреть работы · Скоро</button>
+              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="neurophoto">Скоро</button>
             </div>
           </article>
 
           <article class="project-card reveal" data-category="video" data-gallery="ai-song-video">
             <div class="project-card__image">
               <div class="project-card__placeholder" aria-hidden="true"><span>Персональные песни и AI-видео</span></div>
-              <img src="images/projects/ai-song-video.jpg" alt="Персональные песни и AI-видео" loading="lazy" data-project-image>
+              <img src="images/projects/ai-song-video.png" alt="Персональные песни и AI-видео" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
               <span class="project-card__category">Видео</span>
@@ -365,14 +425,14 @@
                 <li>AI Image</li>
                 <li>монтаж</li>
               </ul>
-              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="ai-song-video">Смотреть проекты · Скоро</button>
+              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="ai-song-video">Скоро</button>
             </div>
           </article>
 
           <article class="project-card reveal" data-category="visual" data-gallery="ai-visual">
             <div class="project-card__image">
               <div class="project-card__placeholder" aria-hidden="true"><span>AI-визуал и креативы</span></div>
-              <img src="images/projects/ai-visual.jpg" alt="AI-визуал и креативы" loading="lazy" data-project-image>
+              <img src="images/projects/ai-visual.png" alt="AI-визуал и креативы" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
               <span class="project-card__category">Визуал</span>
@@ -384,7 +444,7 @@
                 <li>AI Image</li>
                 <li>Canva</li>
               </ul>
-              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="ai-visual">Смотреть работы · Скоро</button>
+              <button type="button" class="project-card__btn project-card__btn--soon" disabled data-gallery-trigger="ai-visual">Скоро</button>
             </div>
           </article>
         </div>
