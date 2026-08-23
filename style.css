@@ -858,6 +858,10 @@ button {
   object-position: center center;
 }
 
+.project-card__image--pos-neuro img:not(.is-missing) {
+  object-position: center 22%;
+}
+
 .project-card__body {
   display: flex;
   flex-direction: column;
