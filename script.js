@@ -176,6 +176,16 @@ function initProjectImages() {
 
 /* ===== ДАННЫЕ ГАЛЕРЕЙ КЕЙСОВ ===== */
 const CASE_GALLERIES = {
+  beloretsk: {
+    title: 'Белорецк. 1762–2026',
+    items: [
+      { src: 'images/projects/beloretsk-01.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 1' },
+      { src: 'images/projects/beloretsk-02.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 2' },
+      { src: 'images/projects/beloretsk-03.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 3' },
+      { src: 'images/projects/beloretsk-04.PNG', alt: 'Белорецк. 1762–2026 — исторический кадр 4' },
+      { src: 'images/projects/beloretsk-05.PNG', alt: 'Белорецк. 1762–2026 — исторический кадр 5' }
+    ]
+  },
   neurophoto: {
     title: 'Нейрофотосессии',
     items: [
