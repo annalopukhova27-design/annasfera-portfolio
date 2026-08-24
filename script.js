@@ -179,6 +179,7 @@ const CASE_GALLERIES = {
   beloretsk: {
     title: 'Белорецк. 1762–2026',
     items: [
+      { src: 'images/projects/beloretsk.png', alt: 'Белорецк. 1762–2026 — обложка проекта' },
       { src: 'images/projects/beloretsk-01.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 1' },
       { src: 'images/projects/beloretsk-02.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 2' },
       { src: 'images/projects/beloretsk-03.JPEG', alt: 'Белорецк. 1762–2026 — исторический кадр 3' },
@@ -189,17 +190,21 @@ const CASE_GALLERIES = {
   neurophoto: {
     title: 'Нейрофотосессии',
     items: [
+      { src: 'images/projects/neurophoto.png', alt: 'Нейрофотосессии — обложка проекта' },
       { src: 'images/projects/neurophoto-01.PNG', alt: 'Семейная новогодняя нейрофотосессия' },
       { src: 'images/projects/neurophoto-02.PNG', alt: 'Тематический нейрофотообраз ко Дню Победы' },
       { src: 'images/projects/neurophoto-03.PNG', alt: 'Весенняя нейрофотосессия с тюльпанами' },
       { src: 'images/projects/neurophoto-04.PNG', alt: 'Нейрофотообраз на морском побережье' },
       { src: 'images/projects/neurophoto-05.PNG', alt: 'Студийный женский образ в зелёном платье' },
-      { src: 'images/projects/neurophoto-06.PNG', alt: 'Праздничный нейрофотообраз с конфетти' }
+      { src: 'images/projects/neurophoto-06.PNG', alt: 'Праздничный нейрофотообраз с конфетти' },
+      { src: 'images/projects/gallery-graduation.png', alt: 'Нейрофотосессия к выпускному — тематический образ' },
+      { src: 'images/projects/gallery-may9.png', alt: 'Тематический AI-образ ко Дню Победы' }
     ]
   },
   'ai-song-video': {
     title: 'Персональные песни и AI-видео',
     items: [
+      { src: 'images/projects/ai-video-baby.png', alt: 'Персональные песни и AI-видео — обложка проекта' },
       { src: 'images/projects/ai-video-01.JPEG', alt: 'Кадр проекта с дочерью — персональное AI-видео' },
       { src: 'images/projects/ai-video-02.JPEG', alt: 'Кадр проекта с дочерью — визуальная сцена' },
       { src: 'images/projects/ai-video-03.JPEG', alt: 'Кадр проекта с дочерью — AI-история' },
@@ -211,12 +216,16 @@ const CASE_GALLERIES = {
   'ai-visual': {
     title: 'AI-визуал и креативы',
     items: [
+      { src: 'images/projects/ai-visual-birthday.png', alt: 'AI-визуал и креативы — обложка проекта' },
       { src: 'images/projects/ai-visual-01.png', alt: 'Рекламный персонажный AI-визуал' },
       { src: 'images/projects/ai-visual-02.PNG', alt: 'Предметный рекламный визуал с телефоном' },
       { src: 'images/projects/ai-visual-03.PNG', alt: 'Рекламная обложка «Сварочные работы»', wide: true },
       { src: 'images/projects/ai-visual-04.JPEG', alt: 'Зимний визуал Белорецка со снежным шаром', square: true },
       { src: 'images/projects/ai-visual-05.PNG', alt: 'Атмосферный AI-пейзаж и креатив' },
-      { src: 'images/projects/ai-visual-06.PNG', alt: 'Рекламный макет сварочных услуг' }
+      { src: 'images/projects/ai-visual-06.PNG', alt: 'Рекламный макет сварочных услуг' },
+      { src: 'images/projects/gallery-product.png', alt: 'AI-визуал для косметического продукта' },
+      { src: 'images/projects/gallery-city-art.png', alt: 'Креативный AI-визуал городской сцены' },
+      { src: 'images/projects/gallery-knitted-city.png', alt: 'Стилизованный AI-визуал Санкт-Петербурга', square: true }
     ]
   }
 };
@@ -366,12 +375,14 @@ function initCaseGalleries() {
     const data = CASE_GALLERIES[key];
     if (!data) return;
 
+    const items = dedupeGalleryItems(data.items);
+
     activeKey = key;
     lastFocus = document.activeElement;
     titleEl.textContent = data.title;
     gridEl.innerHTML = '';
 
-    data.items.forEach((item, index) => {
+    items.forEach((item, index) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'case-gallery__item';
@@ -387,7 +398,7 @@ function initCaseGalleries() {
 
       btn.addEventListener('click', () => {
         if (typeof window.__openProjectLightbox === 'function') {
-          window.__openProjectLightbox(data.items, index);
+          window.__openProjectLightbox(items, index);
         }
       });
 
@@ -398,6 +409,16 @@ function initCaseGalleries() {
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     modal.querySelector('.case-gallery__close')?.focus();
+  }
+
+  function dedupeGalleryItems(list) {
+    const seen = new Set();
+    return list.filter(item => {
+      const key = (item.src || '').toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   }
 
   document.querySelectorAll('[data-case-gallery]').forEach(el => {
@@ -444,7 +465,14 @@ function initScrollTop() {
 function initContactForm() {
   const form = document.getElementById('contactForm');
   const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
   const toastClose = document.getElementById('toastClose');
+  const fallback = document.getElementById('requestFallback');
+  const fallbackText = document.getElementById('requestFallbackText');
+  const fallbackCopy = document.getElementById('requestFallbackCopy');
+  if (!form || !toast || !toastMessage) return;
+
+  const TELEGRAM_DM = 'https://t.me/anyutka07';
 
   const fields = {
     name: {
@@ -490,9 +518,75 @@ function initContactForm() {
         validateField(key);
       }
     });
+    fields[key].el.addEventListener('change', () => {
+      if (fields[key].el.classList.contains('error')) {
+        validateField(key);
+      }
+    });
   });
 
-  form.addEventListener('submit', (e) => {
+  function buildRequestText() {
+    const taskSelect = fields.taskType.el;
+    const taskLabel = taskSelect.options[taskSelect.selectedIndex]?.text || taskSelect.value;
+
+    return [
+      'Заявка с сайта АннаСфера',
+      '',
+      `Имя: ${fields.name.el.value.trim()}`,
+      `Контакт: ${fields.contact.el.value.trim()}`,
+      `Тип задачи: ${taskLabel}`,
+      '',
+      'Сообщение:',
+      fields.message.el.value.trim()
+    ].join('\n');
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(area);
+    if (!ok) throw new Error('copy-failed');
+    return true;
+  }
+
+  function showToast(message) {
+    toastMessage.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 7000);
+  }
+
+  function openFallback(text) {
+    if (!fallback || !fallbackText) {
+      showToast('Скопируйте сообщение и отправьте его мне в Telegram.');
+      return;
+    }
+    fallbackText.value = text;
+    fallback.hidden = false;
+    fallback.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    fallbackText.focus();
+    fallbackText.select();
+  }
+
+  function closeFallback() {
+    if (!fallback) return;
+    fallback.hidden = true;
+    fallback.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     let isValid = true;
@@ -502,18 +596,41 @@ function initContactForm() {
 
     if (!isValid) return;
 
-    // Демонстрационный режим — без отправки на сервер
-    form.reset();
-    showToast();
+    const requestText = buildRequestText();
+
+    try {
+      await copyText(requestText);
+      form.reset();
+      showToast('Заявка подготовлена и скопирована. Сейчас откроется Telegram — вставьте сообщение и отправьте его мне.');
+      window.open(TELEGRAM_DM, '_blank', 'noopener,noreferrer');
+    } catch (err) {
+      openFallback(requestText);
+    }
   });
 
-  function showToast() {
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 5000);
-  }
-
-  toastClose.addEventListener('click', () => {
+  toastClose?.addEventListener('click', () => {
     toast.classList.remove('show');
+  });
+
+  fallback?.querySelectorAll('[data-request-fallback-close]').forEach(el => {
+    el.addEventListener('click', closeFallback);
+  });
+
+  fallbackCopy?.addEventListener('click', async () => {
+    try {
+      await copyText(fallbackText.value);
+      showToast('Текст скопирован. Откройте Telegram и вставьте сообщение.');
+    } catch (err) {
+      fallbackText.focus();
+      fallbackText.select();
+      showToast('Скопируйте сообщение вручную и отправьте его мне в Telegram.');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && fallback && !fallback.hidden) {
+      closeFallback();
+    }
   });
 }
 

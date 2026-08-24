@@ -992,6 +992,40 @@ button {
   aspect-ratio: 1 / 1;
 }
 
+.case-gallery__footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.case-gallery__telegram {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.case-gallery__telegram:hover {
+  color: var(--color-accent-light);
+  border-bottom-color: var(--color-accent-light);
+}
+
+.case-gallery__note {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
 /* ===== LIGHTBOX ПРОЕКТОВ ===== */
 .lightbox {
   position: fixed;
@@ -1751,6 +1785,7 @@ button {
 .toast p {
   font-size: 0.95rem;
   margin: 0;
+  line-height: 1.45;
 }
 
 .toast__close {
@@ -1759,10 +1794,108 @@ button {
   line-height: 1;
   padding: 0 4px;
   transition: color var(--transition);
+  flex-shrink: 0;
 }
 
 .toast__close:hover {
   color: #fff;
+}
+
+/* ===== ЗАПАСНОЙ ВАРИАНТ ФОРМЫ ===== */
+.request-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.request-fallback[hidden] {
+  display: none;
+}
+
+.request-fallback__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 28, 0.72);
+  cursor: pointer;
+}
+
+.request-fallback__panel {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 28px 24px 24px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.request-fallback__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.request-fallback__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 40px 16px 0;
+  color: var(--color-text);
+}
+
+.request-fallback__text {
+  width: 100%;
+  min-height: 220px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+}
+
+.request-fallback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .request-fallback {
+    padding: 12px;
+  }
+
+  .request-fallback__actions {
+    flex-direction: column;
+  }
+
+  .request-fallback__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ===== КНОПКА НАВЕРХ ===== */

@@ -627,10 +627,24 @@
 
   </main>
 
-  <!-- Уведомление об отправке формы -->
+  <!-- Уведомление по форме -->
   <div class="toast" id="toast" role="alert" aria-live="polite">
-    <p>Спасибо! Ваша заявка принята. Я свяжусь с вами удобным способом.</p>
+    <p id="toastMessage"></p>
     <button class="toast__close" id="toastClose" aria-label="Закрыть">&times;</button>
+  </div>
+
+  <!-- Запасной вариант, если буфер обмена недоступен -->
+  <div class="request-fallback" id="requestFallback" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="requestFallbackTitle">
+    <div class="request-fallback__backdrop" data-request-fallback-close></div>
+    <div class="request-fallback__panel">
+      <button type="button" class="request-fallback__close" data-request-fallback-close aria-label="Закрыть">&times;</button>
+      <h3 class="request-fallback__title" id="requestFallbackTitle">Скопируйте сообщение и отправьте его мне в Telegram</h3>
+      <textarea class="request-fallback__text" id="requestFallbackText" readonly rows="12"></textarea>
+      <div class="request-fallback__actions">
+        <button type="button" class="btn btn--primary" id="requestFallbackCopy">Скопировать ещё раз</button>
+        <a class="btn btn--outline" href="https://t.me/anyutka07" target="_blank" rel="noopener noreferrer">Открыть Telegram</a>
+      </div>
+    </div>
   </div>
 
   <!-- Кнопка «Наверх» -->
@@ -674,6 +688,10 @@
       <button type="button" class="case-gallery__close" data-case-gallery-close aria-label="Закрыть галерею">&times;</button>
       <h3 class="case-gallery__title" id="caseGalleryTitle"></h3>
       <div class="case-gallery__grid" id="caseGalleryGrid"></div>
+      <div class="case-gallery__footer">
+        <a href="https://t.me/annapromptstudiochat" class="case-gallery__telegram" target="_blank" rel="noopener noreferrer">Больше работ в Telegram</a>
+        <p class="case-gallery__note">Доступность Telegram может зависеть от региона.</p>
+      </div>
     </div>
   </div>
 
