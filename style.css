@@ -172,8 +172,17 @@ button {
   box-shadow: var(--shadow-lg);
 }
 
-.btn--full {
-  width: 100%;
+a:focus-visible,
+button:focus-visible,
+.filter-btn:focus-visible,
+.project-card__btn:focus-visible,
+.contact-link:focus-visible,
+.nav__link:focus-visible,
+.mobile-menu__link:focus-visible,
+.scroll-top:focus-visible,
+.burger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* ===== ШАПКА ===== */
@@ -1035,6 +1044,8 @@ button {
   align-items: center;
   justify-content: center;
   padding: 24px;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .lightbox[hidden] {

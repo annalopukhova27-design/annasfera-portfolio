@@ -59,6 +59,7 @@ function initMobileMenu() {
     burger.classList.toggle('active', isOpen);
     mobileMenu.classList.toggle('open', isOpen);
     burger.setAttribute('aria-expanded', isOpen);
+    burger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
     mobileMenu.setAttribute('aria-hidden', !isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }
@@ -310,17 +311,6 @@ function initProjectLightbox() {
         e.preventDefault();
         open();
       }
-    });
-  });
-
-  document.querySelectorAll('[data-lightbox-single]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.getAttribute('data-lightbox-single');
-      const card = btn.closest('.project-card');
-      const img = card?.querySelector('.project-card__image img');
-      if (!img) return;
-      openLightbox([{ src: img.currentSrc || img.src, alt: img.alt || '' }], 0);
-      void key;
     });
   });
 
