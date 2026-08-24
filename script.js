@@ -1,6 +1,6 @@
 /**
  * АннаСфера — Основной скрипт сайта
- * Отвечает за: меню, навигацию, фильтрацию, анимации, форму, год
+ * Отвечает за: меню, навигацию, фильтрацию, анимации, год
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectLightbox();
   initCaseGalleries();
   initScrollTop();
-  initContactForm();
   initCurrentYear();
   initHeroAurora();
   initGalleryCarousel();
@@ -458,179 +457,6 @@ function initScrollTop() {
 
   scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-/* ===== ФОРМА ОБРАТНОЙ СВЯЗИ ===== */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  const toast = document.getElementById('toast');
-  const toastMessage = document.getElementById('toastMessage');
-  const toastClose = document.getElementById('toastClose');
-  const fallback = document.getElementById('requestFallback');
-  const fallbackText = document.getElementById('requestFallbackText');
-  const fallbackCopy = document.getElementById('requestFallbackCopy');
-  if (!form || !toast || !toastMessage) return;
-
-  const TELEGRAM_DM = 'https://t.me/anyutka07';
-
-  const fields = {
-    name: {
-      el: document.getElementById('name'),
-      error: document.getElementById('nameError'),
-      validate: (val) => val.trim().length >= 2 || 'Введите имя (минимум 2 символа)'
-    },
-    contact: {
-      el: document.getElementById('contact'),
-      error: document.getElementById('contactError'),
-      validate: (val) => val.trim().length >= 3 || 'Укажите способ связи'
-    },
-    taskType: {
-      el: document.getElementById('taskType'),
-      error: document.getElementById('taskTypeError'),
-      validate: (val) => val !== '' || 'Выберите тип задачи'
-    },
-    message: {
-      el: document.getElementById('message'),
-      error: document.getElementById('messageError'),
-      validate: (val) => val.trim().length >= 10 || 'Сообщение должно содержать минимум 10 символов'
-    }
-  };
-
-  function validateField(key) {
-    const field = fields[key];
-    const result = field.validate(field.el.value);
-
-    if (result === true) {
-      field.el.classList.remove('error');
-      field.error.textContent = '';
-      return true;
-    }
-
-    field.el.classList.add('error');
-    field.error.textContent = result;
-    return false;
-  }
-
-  Object.keys(fields).forEach(key => {
-    fields[key].el.addEventListener('input', () => {
-      if (fields[key].el.classList.contains('error')) {
-        validateField(key);
-      }
-    });
-    fields[key].el.addEventListener('change', () => {
-      if (fields[key].el.classList.contains('error')) {
-        validateField(key);
-      }
-    });
-  });
-
-  function buildRequestText() {
-    const taskSelect = fields.taskType.el;
-    const taskLabel = taskSelect.options[taskSelect.selectedIndex]?.text || taskSelect.value;
-
-    return [
-      'Заявка с сайта АннаСфера',
-      '',
-      `Имя: ${fields.name.el.value.trim()}`,
-      `Контакт: ${fields.contact.el.value.trim()}`,
-      `Тип задачи: ${taskLabel}`,
-      '',
-      'Сообщение:',
-      fields.message.el.value.trim()
-    ].join('\n');
-  }
-
-  async function copyText(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
-    }
-
-    const area = document.createElement('textarea');
-    area.value = text;
-    area.setAttribute('readonly', '');
-    area.style.position = 'fixed';
-    area.style.opacity = '0';
-    document.body.appendChild(area);
-    area.select();
-    const ok = document.execCommand('copy');
-    document.body.removeChild(area);
-    if (!ok) throw new Error('copy-failed');
-    return true;
-  }
-
-  function showToast(message) {
-    toastMessage.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 7000);
-  }
-
-  function openFallback(text) {
-    if (!fallback || !fallbackText) {
-      showToast('Скопируйте сообщение и отправьте его мне в Telegram.');
-      return;
-    }
-    fallbackText.value = text;
-    fallback.hidden = false;
-    fallback.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    fallbackText.focus();
-    fallbackText.select();
-  }
-
-  function closeFallback() {
-    if (!fallback) return;
-    fallback.hidden = true;
-    fallback.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    let isValid = true;
-    Object.keys(fields).forEach(key => {
-      if (!validateField(key)) isValid = false;
-    });
-
-    if (!isValid) return;
-
-    const requestText = buildRequestText();
-
-    try {
-      await copyText(requestText);
-      form.reset();
-      showToast('Заявка подготовлена и скопирована. Сейчас откроется Telegram — вставьте сообщение и отправьте его мне.');
-      window.open(TELEGRAM_DM, '_blank', 'noopener,noreferrer');
-    } catch (err) {
-      openFallback(requestText);
-    }
-  });
-
-  toastClose?.addEventListener('click', () => {
-    toast.classList.remove('show');
-  });
-
-  fallback?.querySelectorAll('[data-request-fallback-close]').forEach(el => {
-    el.addEventListener('click', closeFallback);
-  });
-
-  fallbackCopy?.addEventListener('click', async () => {
-    try {
-      await copyText(fallbackText.value);
-      showToast('Текст скопирован. Откройте Telegram и вставьте сообщение.');
-    } catch (err) {
-      fallbackText.focus();
-      fallbackText.select();
-      showToast('Скопируйте сообщение вручную и отправьте его мне в Telegram.');
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && fallback && !fallback.hidden) {
-      closeFallback();
-    }
   });
 }
 
