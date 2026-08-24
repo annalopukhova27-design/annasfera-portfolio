@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initPortfolioFilter();
   initProjectImages();
+  initProjectLightbox();
   initScrollTop();
   initContactForm();
   initCurrentYear();
@@ -168,6 +169,71 @@ function initProjectImages() {
     if (img.complete) {
       if (img.naturalWidth === 0) markMissing();
       else markLoaded();
+    }
+  });
+}
+
+/* ===== LIGHTBOX ПРЕВЬЮ ПРОЕКТОВ И ГАЛЕРЕИ ===== */
+function initProjectLightbox() {
+  const lightbox = document.getElementById('projectLightbox');
+  const lightboxImg = document.getElementById('lightboxImage');
+  if (!lightbox || !lightboxImg) return;
+
+  const projectTriggers = document.querySelectorAll('.project-card__image--lightbox');
+  const gallerySlides = document.querySelectorAll('.gallery-carousel__slide');
+  let lastFocus = null;
+
+  function openLightboxFromImg(img) {
+    if (!img || img.classList.contains('is-missing') || !img.getAttribute('src')) return;
+
+    lastFocus = document.activeElement;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt || '';
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lightbox.querySelector('.lightbox__close')?.focus();
+  }
+
+  function openLightbox(trigger) {
+    openLightboxFromImg(trigger.querySelector('img'));
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.removeAttribute('src');
+    lightboxImg.alt = '';
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') {
+      lastFocus.focus();
+    }
+  }
+
+  projectTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => openLightbox(trigger));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(trigger);
+      }
+    });
+  });
+
+  gallerySlides.forEach(slide => {
+    slide.addEventListener('click', () => {
+      if (!slide.classList.contains('is-active')) return;
+      openLightboxFromImg(slide.querySelector('img'));
+    });
+  });
+
+  lightbox.querySelectorAll('[data-lightbox-close]').forEach(el => {
+    el.addEventListener('click', closeLightbox);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.hidden) {
+      closeLightbox();
     }
   });
 }

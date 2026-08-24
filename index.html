@@ -374,7 +374,7 @@
           </article>
 
           <article class="project-card reveal" data-category="video" data-gallery="beloretsk">
-            <div class="project-card__image project-card__image--pos-center">
+            <div class="project-card__image project-card__image--pos-beloretsk project-card__image--lightbox" role="button" tabindex="0" aria-label="Открыть изображение Белорецк. 1762–2026">
               <img src="images/projects/beloretsk.png" alt="Белорецк. 1762–2026 — исторический AI-ролик" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
@@ -392,7 +392,7 @@
           </article>
 
           <article class="project-card reveal" data-category="neurophoto" data-gallery="neurophoto">
-            <div class="project-card__image project-card__image--pos-neuro">
+            <div class="project-card__image project-card__image--pos-neuro project-card__image--lightbox" role="button" tabindex="0" aria-label="Открыть изображение Нейрофотосессии">
               <img src="images/projects/neurophoto.png" alt="Нейрофотосессии" loading="lazy" data-project-image>
             </div>
             <div class="project-card__body">
@@ -411,7 +411,7 @@
           </article>
 
           <article class="project-card reveal" data-category="video" data-gallery="ai-song-video">
-            <div class="project-card__image project-card__image--pos-baby">
+            <div class="project-card__image project-card__image--pos-baby project-card__image--lightbox" role="button" tabindex="0" aria-label="Открыть изображение Персональные песни и AI-видео">
               <div class="project-card__placeholder" aria-hidden="true"><span>Персональные песни и AI-видео</span></div>
               <img src="images/projects/ai-video-baby.png" alt="Персональные песни и AI-видео — творческий проект" loading="lazy" data-project-image>
             </div>
@@ -429,7 +429,7 @@
           </article>
 
           <article class="project-card reveal" data-category="visual" data-gallery="ai-visual">
-            <div class="project-card__image">
+            <div class="project-card__image project-card__image--lightbox" role="button" tabindex="0" aria-label="Открыть изображение AI-визуал и креативы">
               <div class="project-card__placeholder" aria-hidden="true"><span>AI-визуал и креативы</span></div>
               <img src="images/projects/ai-visual-birthday.png" alt="AI-визуал и креативы — праздничный визуал" loading="lazy" data-project-image>
             </div>
@@ -467,19 +467,19 @@
           <div class="gallery-carousel__stage">
             <div class="gallery-carousel__track">
               <div class="gallery-carousel__slide" data-index="0">
-                <img src="https://images.unsplash.com/photo-1504051771394-dd2e66b2e08f?w=600&auto=format&fit=crop&q=80" alt="Нейрофотосессия — портрет" width="400" height="600" loading="lazy">
+                <img src="images/projects/gallery-graduation.png" alt="Нейрофотосессия к выпускному — тематический образ" width="400" height="600" loading="lazy" class="gallery-carousel__img gallery-carousel__img--graduation">
               </div>
               <div class="gallery-carousel__slide" data-index="1">
-                <img src="https://images.unsplash.com/photo-1526510747491-58f928ec870f?w=600&auto=format&fit=crop&q=80" alt="Атмосферный визуал" width="400" height="600" loading="lazy">
+                <img src="images/projects/gallery-may9.png" alt="Тематический AI-образ ко Дню Победы" width="400" height="600" loading="lazy" class="gallery-carousel__img gallery-carousel__img--may9">
               </div>
               <div class="gallery-carousel__slide" data-index="2">
-                <img src="https://images.unsplash.com/photo-1581403341630-a6e0b9d2d257?w=600&auto=format&fit=crop&q=80" alt="Персональный образ" width="400" height="600" loading="lazy">
+                <img src="images/projects/gallery-product.png" alt="AI-визуал для косметического продукта" width="400" height="600" loading="lazy" class="gallery-carousel__img gallery-carousel__img--product">
               </div>
               <div class="gallery-carousel__slide" data-index="3">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80" alt="Креативный портрет" width="400" height="600" loading="lazy">
+                <img src="images/projects/gallery-city-art.png" alt="Креативный AI-визуал городской сцены" width="400" height="600" loading="lazy" class="gallery-carousel__img gallery-carousel__img--city">
               </div>
               <div class="gallery-carousel__slide" data-index="4">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80" alt="Стильный AI-образ" width="400" height="600" loading="lazy">
+                <img src="images/projects/gallery-knitted-city.png" alt="Стилизованный AI-визуал Санкт-Петербурга" width="400" height="600" loading="lazy" class="gallery-carousel__img gallery-carousel__img--knitted">
               </div>
             </div>
 
@@ -655,6 +655,15 @@
       </p>
     </div>
   </footer>
+
+  <!-- Lightbox для превью проектов -->
+  <div class="lightbox" id="projectLightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+    <div class="lightbox__backdrop" data-lightbox-close></div>
+    <button type="button" class="lightbox__close" data-lightbox-close aria-label="Закрыть">&times;</button>
+    <div class="lightbox__content">
+      <img class="lightbox__img" id="lightboxImage" src="" alt="">
+    </div>
+  </div>
 
   <script src="aurora.js"></script>
   <script src="gallery-carousel.js"></script>
